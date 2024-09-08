@@ -7,7 +7,6 @@ const CheckBox = ({
 }) => {
   return (
     <label style={{ fontSize: "1.4rem" }}>
-      {label}
       <input
         type="checkbox"
         checked={checked}
@@ -15,6 +14,7 @@ const CheckBox = ({
         onChange={onChange}
         {...restProps}
       />{" "}
+      {label}
     </label>
   );
 };
