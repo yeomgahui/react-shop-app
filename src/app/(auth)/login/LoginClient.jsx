@@ -6,11 +6,12 @@ import LogoPath from "@/assets/colorful.svg";
 import { useRouter } from "next/navigation";
 import styles from "./Auth.module.scss";
 import Loader from "@/components/loader/Loader";
+import Input from "@/components/input/Input";
 
 const LoginClient = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isAutoLogin, setIsAutoLogin] = useState(false);
 
   const router = useRouter();
@@ -36,7 +37,28 @@ const LoginClient = () => {
             <Image priority src={LogoPath} alt="logo" />
           </h1>
           <form onSubmit={loginUser} className={styles.form}>
-            Input
+            <Input
+              email
+              icon="letter"
+              id="email"
+              label="이메일"
+              placeholder="아이디(이메일)"
+              name="email"
+              className={styles.control}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              password
+              icon="lock"
+              id="password"
+              label="비밀번호"
+              placeholder="비밀번호"
+              name="password"
+              className={styles.control}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <div className={styles.group}>
               {/* 자동 로그인, 비밀번호 수정 */}
             </div>
