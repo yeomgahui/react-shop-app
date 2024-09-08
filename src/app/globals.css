@@ -1,11 +1,27 @@
 :root {
-  --font-familly: sans-serif;
+  --font-family: sans-serif;
+
+  --dark-blue: #0a1930;
+  --light-blue: #1f93ff;
+
+  --light-gray: #e7e7e7;
+  --dark-gray: #767676;
+  --border-gray: #cccccc;
+  --table-border-gray: #eee;
+
+  --color-white: #ffffff;
+  --color-primary: #0074e9;
+
+  --color-black: #111111;
+  --color-red: #e52528;
+
+  --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
   scroll-behavior: smooth;
 }
 
@@ -14,7 +30,7 @@ html {
 }
 
 body {
-  font-family: var(--font-familly);
+  font-family: var(--font-family);
 }
 
 a {
