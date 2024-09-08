@@ -9,6 +9,8 @@ import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
 import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckbox";
 import Divider from "@/components/divider/Divider";
+import Button from "@/components/button/Button";
+import Link from "next/link";
 
 const LoginClient = () => {
   const [email, setEmail] = useState("");
@@ -54,9 +56,9 @@ const LoginClient = () => {
               password
               icon="lock"
               id="password"
+              name="password"
               label="비밀번호"
               placeholder="비밀번호"
-              name="password"
               className={styles.control}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -69,11 +71,17 @@ const LoginClient = () => {
               />
             </div>
             <div className={styles.buttonGroup}>
-              Button
+              <Button type="submit" width="100%">
+                로그인
+              </Button>
               <Divider />
-              Button
+              <Button width="100%" secondary>
+                <Link href={"/register"}>회원가입</Link>
+              </Button>
               <Divider />
-              <div>{/* Button */}</div>
+              <div>
+                <Button onClick={signInWithGoogle}>구글 로그인</Button>
+              </div>
             </div>
           </form>
         </div>

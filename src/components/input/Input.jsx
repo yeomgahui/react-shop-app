@@ -57,7 +57,7 @@ const Input = ({
         {icon ? <Icon type={icon} /> : null}
         <input
           id={id}
-          type={checkType}
+          type={checkType()}
           name={name}
           className={classNames(styles.input)}
           placeholder={placeholder}
@@ -67,6 +67,7 @@ const Input = ({
           onChange={handleChange}
           {...restProps}
         />
+
         {password ? (
           <button
             type="button"
