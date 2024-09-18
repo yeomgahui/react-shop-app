@@ -24,7 +24,7 @@ const RegisterClient = () => {
   };
 
   const registerUser = (e) => {
-    e.preventDefaut();
+    e.preventDefault();
     setIsLoading(true);
   };
 
@@ -50,6 +50,7 @@ const RegisterClient = () => {
             />
             <Input
               password
+              autoComplete="off"
               icon="lock"
               id="password"
               name="password"
@@ -62,6 +63,7 @@ const RegisterClient = () => {
 
             <Input
               password
+              autoComplete="off"
               icon="lock"
               id="new-password"
               name="new-password"

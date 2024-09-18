@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import LogoPath from "@/assets/colorful.svg";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+import LogoPath from "@/assets/colorful.svg";
 import styles from "./Auth.module.scss";
 import Loader from "@/components/loader/Loader";
 import Input from "@/components/input/Input";
@@ -11,7 +12,6 @@ import AutoSignInCheckbox from "@/components/autoSignInCheckbox/AutoSignInCheckb
 import Divider from "@/components/divider/Divider";
 import Button from "@/components/button/Button";
 import Link from "next/link";
-import classNames from "classnames";
 
 const LoginClient = () => {
   const [email, setEmail] = useState("");
@@ -26,8 +26,9 @@ const LoginClient = () => {
   };
 
   const loginUser = (e) => {
-    e.preventDefaut();
-    setIsLoading(true);
+    e.preventDefault();
+    toast.info("성공");
+    // setIsLoading(true);
   };
   const signInWithGoogle = () => {
     setIsLoading(true);
