@@ -55,31 +55,33 @@ const Header = () => {
     return null;
   }
   return (
-    <header className="header">
+    <header>
       <div className={styles.loginBar}>
-        <li className={styles.item}>
-          <Link href="/login">로그인</Link>
-        </li>
-        <li className={styles.item}>
-          <Link href="/admin/dashboard">관리자</Link>
-        </li>
-        <li className={styles.item}>
-          <Link href="/order-history">주문목록</Link>
-        </li>
-        <li className={styles.item}>
-          <Link href="/" onClick={logoutUser}>
-            로그아웃
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link href="/">제휴 마케팅</Link>
-        </li>
-        <li className={styles.item}>
-          <Link href="/">쿠팡 플레이</Link>
-        </li>
-        <li className={styles.item}>
-          <Link href="/">고객센터</Link>
-        </li>
+        <ul className={styles.list}>
+          <li className={styles.item}>
+            <Link href="/login">로그인</Link>
+          </li>
+          <li className={styles.item}>
+            <Link href="/admin/dashboard">관리자</Link>
+          </li>
+          <li className={styles.item}>
+            <Link href="/order-history">주문목록</Link>
+          </li>
+          <li className={styles.item}>
+            <Link href="/" onClick={logoutUser}>
+              로그아웃
+            </Link>
+          </li>
+          <li className={styles.item}>
+            <Link href="/">제휴 마케팅</Link>
+          </li>
+          <li className={styles.item}>
+            <Link href="/">쿠팡 플레이</Link>
+          </li>
+          <li className={styles.item}>
+            <Link href="/">고객센터</Link>
+          </li>
+        </ul>
       </div>
       {pathname.startsWith("/admin") ? null : <InnerHeader />}
     </header>
