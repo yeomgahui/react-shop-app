@@ -15,6 +15,13 @@ import Divider from "@/components/divider/Divider";
 import Button from "@/components/button/Button";
 import Link from "next/link";
 
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
+import { auth } from "@/firebase/firebase";
+
 const LoginClient = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,11 +36,30 @@ const LoginClient = () => {
 
   const loginUser = (e) => {
     e.preventDefault();
-    toast.info("성공");
     setIsLoading(true);
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        setIsLoading(false);
+        toast.success("로그인 성공");
+
+        redirectUser();
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast.error(error.message);
+      });
   };
   const signInWithGoogle = () => {
-    setIsLoading(true);
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        toast.success("로그인 성공");
+        redirectUser();
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   return (
