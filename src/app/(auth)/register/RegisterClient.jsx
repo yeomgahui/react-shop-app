@@ -10,6 +10,9 @@ import Input from "@/components/input/Input";
 import Divider from "@/components/divider/Divider";
 import Button from "@/components/button/Button";
 import Link from "next/link";
+import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
 
 const RegisterClient = () => {
   const [email, setEmail] = useState("");
@@ -20,12 +23,30 @@ const RegisterClient = () => {
   const router = useRouter();
 
   const redirectUser = () => {
-    router.push("/");
+    router.push("/login");
   };
 
   const registerUser = (e) => {
     e.preventDefault();
+
+    if (password !== cPassword) {
+      return toast.error("비밀번호가 일치하지 않습니다.");
+    }
+
     setIsLoading(true);
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setIsLoading(false);
+
+        toast.success("회원가입이 완료되었습니다.");
+        redirectUser();
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        toast.error(error.message);
+      });
   };
 
   return (
@@ -47,6 +68,7 @@ const RegisterClient = () => {
               className={styles.control}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <Input
               password
@@ -58,6 +80,7 @@ const RegisterClient = () => {
               placeholder="비밀번호"
               className={styles.control}
               value={password}
+              required
               onChange={(e) => setPassword(e.target.value)}
             />
 
