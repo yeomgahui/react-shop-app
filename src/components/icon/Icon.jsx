@@ -24,7 +24,7 @@ const Icon = ({ type, alt = "", ...restProps }) => {
   }
 
   return (
-    <Image src={src} alt={alt} {...restProps}>
+    <Image src={src} alt={alt} {...restProps} priority>
       {/* Your icon component code goes here */}
     </Image>
   );
