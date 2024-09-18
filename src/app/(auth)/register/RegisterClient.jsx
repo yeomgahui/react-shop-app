@@ -79,9 +79,11 @@ const RegisterClient = () => {
                 회원가입
               </Button>
               <Divider />
-              <Button width="100%" secondary>
-                <Link href={"/login"}>로그인</Link>
-              </Button>
+              <Link href={"login"}>
+                <Button width="100%" secondary>
+                  로그인
+                </Button>
+              </Link>
             </div>
           </form>
         </div>

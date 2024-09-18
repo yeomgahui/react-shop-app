@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import { toast } from "react-toastify";
+
 import LogoPath from "@/assets/colorful.svg";
 import styles from "./Auth.module.scss";
 import Loader from "@/components/loader/Loader";
@@ -28,7 +30,7 @@ const LoginClient = () => {
   const loginUser = (e) => {
     e.preventDefault();
     toast.info("성공");
-    // setIsLoading(true);
+    setIsLoading(true);
   };
   const signInWithGoogle = () => {
     setIsLoading(true);
@@ -50,6 +52,7 @@ const LoginClient = () => {
               label="이메일"
               placeholder="아이디(이메일)"
               name="email"
+              autoComplete="email"
               className={styles.control}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -63,6 +66,7 @@ const LoginClient = () => {
               placeholder="비밀번호"
               className={styles.control}
               value={password}
+              autoComplete="current-password"
               onChange={(e) => setPassword(e.target.value)}
             />
             <div className={styles.group}>
@@ -95,9 +99,11 @@ const LoginClient = () => {
                 로그인
               </Button>
               <Divider />
-              <Button width="100%" secondary>
-                <Link href={"/register"}>회원가입</Link>
-              </Button>
+              <Link href={"/register"}>
+                <Button width="100%" secondary>
+                  회원가입
+                </Button>
+              </Link>
               <Divider />
               <div>
                 <Button onClick={signInWithGoogle}>구글 로그인</Button>
