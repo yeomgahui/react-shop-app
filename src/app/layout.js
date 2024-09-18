@@ -1,3 +1,5 @@
+import Footer from "@/layouts/footer/Footer";
+import Header from "@/layouts/header/Header";
 import ToastProvider from "@/components/toastProvider/ToastProvider";
 
 import "./globals.css";
@@ -15,7 +17,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ToastProvider />
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
