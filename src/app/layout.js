@@ -1,5 +1,6 @@
 import Footer from "@/layouts/footer/Footer";
 import Header from "@/layouts/header/Header";
+import Providers from "@/redux/provider";
 import ToastProvider from "@/components/toastProvider/ToastProvider";
 
 import "./globals.css";
@@ -16,10 +17,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ToastProvider />
-        <Header />
-        {children}
-        <Footer />
+        <Providers>
+          <ToastProvider />
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

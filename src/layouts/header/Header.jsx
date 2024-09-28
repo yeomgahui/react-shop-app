@@ -1,19 +1,22 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useDispatch } from "react-redux";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { toast } from "react-toastify";
 
 import InnerHeader from "@/layouts/innerHeader/InnerHeader";
 
 import { auth } from "@/firebase/firebase";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 
 import styles from "./Header.module.scss";
+import { REMOVE_ACTIVE_USER, SET_ACTIVE_USER } from "@/redux/slice/authSlice";
 
 const Header = () => {
   const pathname = usePathname();
+  const dispatch = useDispatch();
   const [displayName, setDisplayName] = useState("");
 
   useEffect(() => {
@@ -26,13 +29,20 @@ const Header = () => {
         } else {
           setDisplayName(user.displayName);
         }
-        // 유저 정보를 리덕스에 저장
+
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName: user.displayName ? user.displayName : displayName,
+            userID: user.uid,
+          })
+        );
       } else {
         setDisplayName("");
-        // 유저 정보를 리더스에서 삭제
+        dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, []);
+  }, [dispatch, displayName]);
 
   const logoutUser = (e) => {
     e.preventDefault();
