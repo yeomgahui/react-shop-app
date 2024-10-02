@@ -10,8 +10,10 @@ import styles from "./ProductList.module.scss";
 
 const ProductList = ({ products }) => {
   const [sort, setSort] = useState("latest");
+  console.log("products", products);
 
   const filteredProducts = useSelector(selectFilteredProducts);
+  console.log("filteredProducts", filteredProducts);
 
   const dispatch = useDispatch();
 
