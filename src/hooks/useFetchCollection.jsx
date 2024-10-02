@@ -22,10 +22,14 @@ const useFetchCollection = (collectionName) => {
       const q = query(docRef, orderBy("createdAt", "desc"));
 
       onSnapshot(q, (snapshot) => {
-        const allData = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+        const allData = snapshot.docs.map((doc) => {
+          console.log("doc", doc.data());
+          return {
+            id: doc.id,
+            ...doc.data(),
+            createdAt: doc.data().createdAt.toDate().toISOString(),
+          };
+        });
 
         setData(allData);
         setIsLoading(false);
@@ -47,3 +51,7 @@ const useFetchCollection = (collectionName) => {
 };
 
 export default useFetchCollection;
+
+// redux actions
+// type be a string이 되어야 하고 왜 action types이 ba constants되어야 하는가?
+//

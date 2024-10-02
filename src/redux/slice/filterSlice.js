@@ -18,7 +18,7 @@ const filterSlice = createSlice({
           (product) => product.category === category
         );
       }
-      state.filteredProducts = tempProduct;
+      state.filteredProducts = tempProducts;
     },
     FILTER_BY_BRAND(state, action) {
       const { products, brand } = action.payload;
