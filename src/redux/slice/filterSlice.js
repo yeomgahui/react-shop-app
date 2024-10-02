@@ -60,6 +60,20 @@ const filterSlice = createSlice({
 
       state.filteredProducts = tempProducts;
     },
+    SORT_PRODUCTS: (state, action) => {
+      const { products, sort } = action.payload;
+      let tempProducts = [];
+      if (sort === "latest") {
+        tempProducts = products;
+      }
+      if (sort === "lowest-price") {
+        tempProducts = products.slice().sort((a, b) => a.price - b.price);
+      }
+      if (sort === "highest-price") {
+        tempProducts = products.slice().sort((a, b) => b.price - a.price);
+      }
+      state.filteredProducts = tempProducts;
+    },
   },
 });
 
@@ -68,6 +82,7 @@ export const {
   FILTER_BY_CATEGORY,
   FILTER_BY_PRICE,
   FILTER_BY,
+  SORT_PRODUCTS,
 } = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
