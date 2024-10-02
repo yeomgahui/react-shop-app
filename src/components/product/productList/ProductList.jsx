@@ -75,38 +75,38 @@ const ProductList = ({ products }) => {
             </li>
           </ul>
         </div>
-        <div className={styles.limit}>
-          <select
-            value={productsPerPage}
-            onChange={(e) => setProductsPerPage(Number(e.target.value))}
-          >
-            <option value={10}>10개씩 보기</option>
-            <option value={20}>20개씩 보기</option>
-          </select>
-        </div>
+      </div>
+      <div className={styles.limit}>
+        <select
+          value={productsPerPage}
+          onChange={(e) => setProductsPerPage(Number(e.target.value))}
+        >
+          <option value={10}>10개씩 보기</option>
+          <option value={20}>20개씩 보기</option>
+        </select>
+      </div>
 
-        <div className={styles.grid}>
-          {currentProducts.length === 0 ? (
-            <p>상품이 없습니다.</p>
-          ) : (
-            <>
-              {currentProducts.map((product) => {
-                return (
-                  <div key={product.id}>
-                    <ProductItem {...product} />
-                  </div>
-                );
-              })}
-            </>
-          )}
-        </div>
-        {/* <Pagination
+      <div className={styles.grid}>
+        {currentProducts.length === 0 ? (
+          <p>상품이 없습니다.</p>
+        ) : (
+          <>
+            {currentProducts.map((product) => {
+              return (
+                <div key={product.id}>
+                  <ProductItem {...product} />
+                </div>
+              );
+            })}
+          </>
+        )}
+      </div>
+      {/* <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           totalProducts={filteredProducts.length}
           productsPerPage={productsPerPage}
         /> */}
-      </div>
     </div>
   );
 };
