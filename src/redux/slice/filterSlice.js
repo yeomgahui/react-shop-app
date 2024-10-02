@@ -63,8 +63,12 @@ const filterSlice = createSlice({
   },
 });
 
-export const { FILTER_BY_BRAND, FILTER_BY_CATEGORY, FILTER_BY_PRICE } =
-  filterSlice.actions;
+export const {
+  FILTER_BY_BRAND,
+  FILTER_BY_CATEGORY,
+  FILTER_BY_PRICE,
+  FILTER_BY,
+} = filterSlice.actions;
 
 export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 

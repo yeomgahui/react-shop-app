@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   FILTER_BY_BRAND,
   FILTER_BY_CATEGORY,
@@ -9,8 +12,10 @@ import {
   selectMinPrice,
   selectMaxPrice,
 } from "@/redux/slice/productSlice";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { priceFormat } from "@/utils/priceFormat";
+
+import styles from "./ProductFilter.module.scss";
+import Button from "@/components/button/Button";
 
 const ProductFilter = () => {
   const [category, setCategory] = useState("All");
@@ -29,7 +34,7 @@ const ProductFilter = () => {
 
   const filterCategories = (category) => {
     setCategory(category);
-    dispatch(FILTER_BY_CATEGORY({ products, category: cat }));
+    dispatch(FILTER_BY_CATEGORY({ products, category }));
   };
 
   const allBrands = [
@@ -48,9 +53,50 @@ const ProductFilter = () => {
   };
 
   return (
-    <div className="product-filter">
-      <h2>Product Filter</h2>
-      {/* Add your filter controls here */}
+    <div className={styles.filter}>
+      <h4>카테고리</h4>
+      <div className={styles.category}>
+        {allCategories.map((cat, index) => {
+          return (
+            <button
+              key={cat}
+              type="button"
+              className={`${category}` === cat ? styles.active : ""}
+              onClick={() => filterCategories(cat)}
+            >
+              &#8250; {cat}
+            </button>
+          );
+        })}
+      </div>
+      <h4>브랜드</h4>
+      <div className={styles.brand}>
+        <select value={brand} onChange={(e) => setBrand(e.target.value)}>
+          {allBrands.map((brand) => {
+            return (
+              <option key={brand} value={brand}>
+                {brand}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      <h4>가격</h4>
+      <p>{priceFormat(Number(price))}원</p>
+      <div>
+        <input
+          type="range"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          min={minPrice}
+          max={maxPrice}
+        />
+      </div>
+
+      <br />
+
+      <Button onClick={clearFilters}>필터 초기화</Button>
     </div>
   );
 };
