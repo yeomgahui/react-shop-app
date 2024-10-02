@@ -1,4 +1,10 @@
 import {
+  FILTER_BY_BRAND,
+  FILTER_BY_CATEGORY,
+  FILTER_BY_PRICE,
+  FILTER_BY,
+} from "@/redux/slice/filterSlice";
+import {
   selectProducts,
   selectMinPrice,
   selectMaxPrice,
@@ -23,7 +29,7 @@ const ProductFilter = () => {
 
   const filterCategories = (category) => {
     setCategory(category);
-    dispatch(FILTER_BY_CATEGOFY({ products, category: cat }));
+    dispatch(FILTER_BY_CATEGORY({ products, category: cat }));
   };
 
   const allBrands = [
@@ -32,12 +38,8 @@ const ProductFilter = () => {
   ];
 
   useEffect(() => {
-    dispatch(FILTER_BY_BRAND({ products, brand }));
-  }, [dispatch, products, brand]);
-
-  useEffect(() => {
-    dispatch(FILTER_BY_PRICE({ products, price }));
-  }, [dispatch, products, price]);
+    dispatch(FILTER_BY({ products, price, category, brand }));
+  }, [dispatch, products, price, category, brand]);
 
   const clearFilters = () => {
     setCategory("All");
