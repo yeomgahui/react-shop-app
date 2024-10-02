@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   collection,
   doc,
@@ -15,29 +15,26 @@ const useFetchCollection = (collectionName) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getCollection = useCallback(
-    (collection) => {
-      setIsLoading(true);
-      try {
-        collection(db, collectionName);
-        const q = query(collection, orderBy("createdAt", "desc"));
+  const getCollection = useCallback(() => {
+    setIsLoading(true);
+    try {
+      const docRef = collection(db, collectionName);
+      const q = query(docRef, orderBy("createdAt", "desc"));
 
-        onSnapshot(q, (snapshot) => {
-          const allData = snapshot.docs.map(() => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+      onSnapshot(q, (snapshot) => {
+        const allData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
-          setData(allData);
-          setIsLoading(false);
-        });
-      } catch (e) {
+        setData(allData);
         setIsLoading(false);
-        toast.error(e.message);
-      }
-    },
-    [collectionName]
-  );
+      });
+    } catch (e) {
+      setIsLoading(false);
+      toast.error(e.message);
+    }
+  }, [collectionName]);
 
   useEffect(() => {
     getCollection();
