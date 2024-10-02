@@ -1,9 +1,11 @@
 import React from "react";
-import styles from "./ProductItem.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { Rating } from "react-simple-star-rating";
 import { priceFormat } from "@/utils/priceFormat";
+
+import rocketBadgeIcon from "@/assets/badge-rocket.svg";
+import styles from "./ProductItem.module.scss";
 
 const ProductItem = ({ id, name, price, imageURL }) => {
   const shortenText = (text, n) => {
@@ -25,10 +27,11 @@ const ProductItem = ({ id, name, price, imageURL }) => {
           <p>{shortenText(name, 10)}</p>
           <em>
             <strong style={{ color: "#cb1400" }}>{priceFormat(price)}</strong>원{" "}
+            <Image src={rocketBadgeIcon} alt="로켓배송" />
           </em>
-          <div>
+          <div className={styles.rating}>
             <Rating readonly size={17} initialValue={1} />
-            <span className={styles.ratingCount}>(3)</span>
+            <span className={styles.ratingount}>(3)</span>
           </div>
         </div>
       </div>
