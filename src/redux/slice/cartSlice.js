@@ -52,10 +52,32 @@ const cartSlice = createSlice({
 
       state.cartTotalQuantity = totalQuantity;
     },
+    CALCULATE_SUBTOTAL: (state, action) => {
+      const array = [];
+      state.cartItems.map((item) => {
+        const { cartQuantity, price } = item;
+
+        const cartItemAmount = price * cartQuantity;
+
+        return array.push(cartItemAmount);
+      });
+
+      const totalAmount = array.reduce((acc, curr) => acc + curr, 0);
+
+      state.cartTotalAmount = totalAmount;
+    },
+    SAVE_URL: (state, action) => {
+      state.previousURL = action.payload;
+    },
   },
 });
 
-export const { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY } = cartSlice.actions;
+export const {
+  ADD_TO_CART,
+  CALCULATE_TOTAL_QUANTITY,
+  CALCULATE_SUBTOTAL,
+  SAVE_URL,
+} = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;
 export const selectCartTotalQuantity = (state) => state.cart.cartTotalQuantity;
