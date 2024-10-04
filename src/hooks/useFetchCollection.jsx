@@ -23,7 +23,6 @@ const useFetchCollection = (collectionName) => {
 
       onSnapshot(q, (snapshot) => {
         const allData = snapshot.docs.map((doc) => {
-          console.log("doc", doc.data());
           return {
             id: doc.id,
             ...doc.data(),

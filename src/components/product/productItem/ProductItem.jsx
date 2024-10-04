@@ -6,8 +6,19 @@ import { priceFormat } from "@/utils/priceFormat";
 
 import rocketBadgeIcon from "@/assets/badge-rocket.svg";
 import styles from "./ProductItem.module.scss";
+import useFetchDocumtents from "@/hooks/useFetchDocumtents";
 
 const ProductItem = ({ id, name, price, imageURL }) => {
+  // const { documents } = useFetchDocumtents("reviews", ["productID", "==", id]);
+
+  // let productRating = 0;
+
+  // documents.map((doc) => {
+  //   productRating = productRating + doc.rate;
+  // });
+
+  // const rating = productRating / documents.length;
+
   const shortenText = (text, n) => {
     if (text.length > n) {
       const shortenedText = text.substring(0, n).concat("...");
@@ -30,8 +41,14 @@ const ProductItem = ({ id, name, price, imageURL }) => {
             <Image src={rocketBadgeIcon} alt="로켓배송" />
           </em>
           <div className={styles.rating}>
-            <Rating readonly size={17} initialValue={1} />
-            <span className={styles.ratingount}>(3)</span>
+            <Rating
+              readonly
+              size={17}
+              // initialValue={Number.isNaN(rating) ? 0 : rating}
+              initialValue={1}
+            />
+            {/* <span className={styles.ratingCount}>({documents.length})</span> */}
+            <span className={styles.ratingCount}>({3})</span>
           </div>
         </div>
       </div>
