@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import styles from "./Pagination.module.scss";
+import { current } from "@reduxjs/toolkit";
+
 const Pagination = ({
   currentPage,
   productsPerPage,
@@ -33,11 +36,45 @@ const Pagination = ({
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   };
-  for (let i = 0; i < Math.ceil(totalProducts / productsPerPage); i++) {
+
+  for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pageNumbers.push(i);
   }
 
-  return <div></div>;
+  return (
+    <div className={styles.pagination}>
+      <li
+        onClick={paginatePrevPage}
+        className={currentPage === pageNumbers[0] ? `${styles.hidden}` : ""}
+      >
+        {"<"}
+      </li>
+      {pageNumbers.map((number) => {
+        if (number < maxPageNumberLimit + 1 && number >= minPageNumberLimit) {
+          return (
+            <li
+              key={number}
+              onClick={() => paginate(number)}
+              className={currentPage === number ? `${styles.active}` : ""}
+            >
+              {number}
+            </li>
+          );
+        }
+      })}
+
+      <li
+        onClick={paginateNextPage}
+        className={
+          currentPage === pageNumbers[pageNumbers.length - 1]
+            ? `${styles.hidden}`
+            : ""
+        }
+      >
+        {">"}
+      </li>
+    </div>
+  );
 };
 
 export default Pagination;
