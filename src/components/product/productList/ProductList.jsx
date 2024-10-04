@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { SORT_PRODUCTS } from "@/redux/slice/filterSlice";
 
 import ProductItem from "../ProductItem/ProductItem";
+import Pagination from "@/components/pagination/Pagination";
 
 import styles from "./ProductList.module.scss";
 
@@ -101,12 +102,12 @@ const ProductList = ({ products }) => {
           </>
         )}
       </div>
-      {/* <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalProducts={filteredProducts.length}
-          productsPerPage={productsPerPage}
-        /> */}
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalProducts={filteredProducts.length}
+        productsPerPage={productsPerPage}
+      />
     </div>
   );
 };
