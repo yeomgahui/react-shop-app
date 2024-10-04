@@ -15,6 +15,8 @@ import { Rating } from "react-simple-star-rating";
 import styles from "./ProductDetails.module.scss";
 import listCashIcon from "@/assets/list-cash-icon.png";
 import useFetchDocumtents from "@/hooks/useFetchDocumtents";
+import { useDispatch } from "react-redux";
+import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY } from "@/redux/slice/cartSlice";
 
 const ProductDetailsClient = () => {
   const { id } = useParams();
@@ -27,10 +29,12 @@ const ProductDetailsClient = () => {
     id,
   ]);
 
+  const dispatch = useDispatch();
   const [count, setCount] = useState(1);
 
   const addToCart = () => {
-    console.log("Add to cart");
+    dispatch(ADD_TO_CART({ ...product, quantity: count }));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
   };
 
   const today = new Date();
@@ -54,7 +58,7 @@ const ProductDetailsClient = () => {
                 height={410}
               />
             </div>
-            <div className={styles.contetn}>
+            <div className={styles.content}>
               <div className={styles.header}>
                 <p className={styles.brandName}>{product.brand}</p>
                 <p className={styles.productName}>{product.name}</p>
