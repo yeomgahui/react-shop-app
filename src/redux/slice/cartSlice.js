@@ -69,6 +69,43 @@ const cartSlice = createSlice({
     SAVE_URL: (state, action) => {
       state.previousURL = action.payload;
     },
+    DECREASE_CART: (state, action) => {
+      const productIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (state.cartItems[productIndex].cartQuantity > 1) {
+        state.cartItems[productIndex].cartQuantity -= 1;
+        toast.info(`${action.payload.name} 개수 -1`);
+      } else if (state.cartItems[productIndex].cartQuantity === 1) {
+        const newCartItem = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.cartItems = newCartItem;
+        toast.success(
+          `${action.payload.name} 상품이 장바구니에서 삭제되었습니다.`
+        );
+      }
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    REMOVE_FROM_CART: (state, action) => {
+      const newCartItem = state.cartItems.filter(
+        (item) => item.id !== action.payload.id
+      );
+      state.cartItems = newCartItem;
+      toast.success(
+        `${action.payload.name} 상품이 장바구니에서 삭제되었습니다.`
+      );
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    CLEAR_CART: (state, action) => {
+      state.cartItems = [];
+      toast.success("장바구니가 비워졌습니다.");
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
   },
 });
 
@@ -77,6 +114,9 @@ export const {
   CALCULATE_TOTAL_QUANTITY,
   CALCULATE_SUBTOTAL,
   SAVE_URL,
+  CLEAR_CART,
+  DECREASE_CART,
+  REMOVE_FROM_CART,
 } = cartSlice.actions;
 
 export const selectCartItems = (state) => state.cart.cartItems;

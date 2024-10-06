@@ -3,9 +3,13 @@ import styles from "./CartClient.module.css";
 import {
   CALCULATE_SUBTOTAL,
   CALCULATE_TOTAL_QUANTITY,
+  DECREASE_CART,
   selectCartItems,
   selectCartTotalAmount,
   selectCartTotalQuantity,
+  REMOVE_FROM_CART,
+  CLEAR_CART,
+  SAVE_URL,
 } from "@/redux/slice/cartSlice";
 import { useRouter } from "next/navigation";
 import { selectIsLoggedIn } from "@/redux/slice/authSlice";
@@ -25,11 +29,17 @@ const CartClient = () => {
     dispatch(ADD_TO_CART(cart));
   };
 
-  const decreaseCart = (cart) => {};
+  const decreaseCart = (cart) => {
+    dispatch(DECREASE_CART(cart));
+  };
 
-  const removeFromCart = (cart) => {};
+  const removeFromCart = (cart) => {
+    dispatch(REMOVE_FROM_CART(cart));
+  };
 
-  const clearCart = () => {};
+  const clearCart = () => {
+    dispatch(CLEAR_CART());
+  };
 
   useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());
