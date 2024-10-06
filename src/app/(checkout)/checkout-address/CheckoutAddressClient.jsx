@@ -11,6 +11,7 @@ import {
 
 import styles from "./CheckoutAddress.module.scss";
 import Heading from "@/components/heading/Heading";
+import Button from "@/components/button/Button";
 
 const initialAddressState = {
   name: "",
@@ -32,12 +33,12 @@ const CheckoutAddressClient = () => {
   const router = useRouter();
 
   const handleShipping = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setShippingAddress({ ...shippingAddress, [name]: value });
   };
 
   const handleBilling = (e) => {
-    const { name, value } = e.target.value;
+    const { name, value } = e.target;
     setBillingAddress({ ...billingAddress, [name]: value });
   };
   const handleSubmit = (e) => {
@@ -134,6 +135,7 @@ const CheckoutAddressClient = () => {
             value={billingAddress.postalCode}
             onChange={handleBilling}
           />
+          <Button type="submit">주문하기</Button>
         </div>
       </form>
     </section>
