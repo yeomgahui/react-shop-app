@@ -10,6 +10,7 @@ import {
 } from "@/redux/slice/checkoutSlice";
 
 import styles from "./CheckoutAddress.module.scss";
+import Heading from "@/components/heading/Heading";
 
 const initialAddressState = {
   name: "",
@@ -46,7 +47,97 @@ const CheckoutAddressClient = () => {
     router.push("/checkout");
   };
 
-  return <div>check</div>;
+  return (
+    <section className={styles.checkout}>
+      <Heading title="상세주문" />
+      <form onSubmit={handleSubmit}>
+        <div className={styles.card}>
+          <h3>배송 주소</h3>
+          <label htmlFor="">받는 사람 이름</label>
+          <input
+            type="text"
+            placeholder="받는 사람 이름"
+            required
+            name="name"
+            value={shippingAddress.name}
+            onChange={handleShipping}
+          />
+
+          <label>상세 주소</label>
+          <input
+            type="text"
+            placeholder="상세 주소"
+            required
+            name="line"
+            value={shippingAddress.line}
+            onChange={handleShipping}
+          />
+
+          <label>도시</label>
+          <input
+            type="text"
+            placeholder="도시"
+            required
+            name="city"
+            value={shippingAddress.city}
+            onChange={handleShipping}
+          />
+
+          <label>우편번호</label>
+          <input
+            type="text"
+            placeholder="우편번호"
+            required
+            name="postalCode"
+            value={shippingAddress.postalCode}
+            onChange={handleShipping}
+          />
+        </div>
+        <div className={styles.card}>
+          <h3>청구지 주소</h3>
+          <label htmlFor="">보내는 사람 이름</label>
+          <input
+            type="text"
+            placeholder="보내는 사람 이름"
+            required
+            name="name"
+            value={billingAddress.name}
+            onChange={handleBilling}
+          />
+
+          <label>상세 주소</label>
+          <input
+            type="text"
+            placeholder="상세 주소"
+            required
+            name="line"
+            value={billingAddress.line}
+            onChange={handleBilling}
+          />
+
+          <label>도시</label>
+          <input
+            type="text"
+            placeholder="도시"
+            required
+            name="city"
+            value={billingAddress.city}
+            onChange={handleBilling}
+          />
+
+          <label>우편번호</label>
+          <input
+            type="text"
+            placeholder="우편번호"
+            required
+            name="postalCode"
+            value={billingAddress.postalCode}
+            onChange={handleBilling}
+          />
+        </div>
+      </form>
+    </section>
+  );
 };
 
 export default CheckoutAddressClient;
