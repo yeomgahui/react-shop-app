@@ -15,6 +15,7 @@ import {
   selectCartTotalQuantity,
   REMOVE_FROM_CART,
   CLEAR_CART,
+  ADD_TO_CART,
   SAVE_URL,
 } from "@/redux/slice/cartSlice";
 import { selectIsLoggedIn } from "@/redux/slice/authSlice";
@@ -50,6 +51,16 @@ const CartClient = () => {
 
   const clearCart = () => {
     dispatch(CLEAR_CART());
+  };
+
+  const url = typeof window !== "undefined" ? window.location.href : "";
+  const checkout = () => {
+    if (isLoggedIn) {
+      router.push("/checkout-address");
+    } else {
+      dispatch(SAVE_URL(url));
+      router.push("/login");
+    }
   };
 
   useEffect(() => {
@@ -132,7 +143,7 @@ const CartClient = () => {
                 <h4>합계</h4>
                 <p>{priceFormat(cartTotalAmount)}원</p>
               </div>
-              <Button>계산하기</Button>
+              <Button onClick={checkout}>계산하기</Button>
             </div>
           </div>
         </>
