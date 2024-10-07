@@ -16,7 +16,7 @@ import {
 import { db } from "@/firebase/firebase";
 import { selectUserID, selectEmail } from "@/redux/slice/authSlice";
 import { selectShippingAddress } from "@/redux/slice/checkoutSlice";
-import { collection } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 
 import styles from "./Checkout.module.scss";
 const CheckoutClient = () => {
@@ -45,7 +45,7 @@ const CheckoutClient = () => {
         const { orderId, paymentKey, amount } = data;
         const secretKey = process.env.NEXT_PUBLIC_TOSS_SECRET_KEY;
 
-        const url = `https://api.tosspayments.com/v1/brandpay/payments/confirm`;
+        const url = `https://api.tosspayments.com/v1/payments/confirm`;
         const basicToken = Buffer.from(`${secretKey}:`, "utf-8").toString(
           "base64"
         );
@@ -87,6 +87,7 @@ const CheckoutClient = () => {
         router.push(`/checkout-success?orderId=${orderId}`);
       })
       .catch((error) => {
+        console.log("error", error);
         if (error.code === "USER_CANCEL") {
           toast.error("결제창이 닫아졌습니다.");
         }
