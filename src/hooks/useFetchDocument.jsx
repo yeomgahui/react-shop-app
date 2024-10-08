@@ -8,7 +8,9 @@ const useFetchDocument = (collectionName, documentID) => {
 
   const getDocument = useCallback(async () => {
     const docRef = doc(db, collectionName, documentID);
+    console.log("docRef", docRef, collectionName, documentID);
     const docSnap = await getDoc(docRef);
+    console.log("docSnap", docSnap);
 
     if (docSnap.exists()) {
       const obj = {
